@@ -193,9 +193,10 @@ class Trainer(object):
             support, query, false, support_left, support_right, query_left, query_right, false_left, false_right = data
 
             self.batch_nums += 1
-            support_meta = self.get_meta(support_left, support_right)
-            query_meta = self.get_meta(query_left, query_right)
-            false_meta = self.get_meta(false_left, false_right)
+            if not self.no_meta:
+                support_meta = self.get_meta(support_left, support_right)
+                query_meta = self.get_meta(query_left, query_right)
+                false_meta = self.get_meta(false_left, false_right)
 
             support = Variable(torch.LongTensor(support)).to(self.device)
             query = Variable(torch.LongTensor(query)).to(self.device)
